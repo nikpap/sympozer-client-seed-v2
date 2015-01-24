@@ -27,6 +27,8 @@ angular.module('mainEventsApp', []);
 angular.module('angularTranslateApp', ['pascalprecht.translate']);
 angular.module('authenticationApp', ['ngCookies', 'personsApp']);
 angular.module('importApp', []);
+angular.module('socialsApp', []);
+
 
 angular.module('contextualizationApp', ['mainEventsApp']).run(function (contextFact)
 {
@@ -71,7 +73,8 @@ var sympozerApp = angular.module('sympozerApp', [
     'papersApp',
     'messagesApp',
     'analyticsApp',
-    'notificationsApp'
+    'notificationsApp',
+    'socialsApp'
 ]);
 
 

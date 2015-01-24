@@ -12,6 +12,7 @@ You need nodejs to be installed on your machine.
 * 2) Install grunt-cli to run grunt cmd : npm install -g grunt-cli
 * 3) Copy a version of local-config.TEMPLATE to local-config.json to the root folder : cp local-config.json.TEMPLATE  local-config.json
 * 4) Edit your local-config.json file to select your favorite browser process
+* 5) install bower globally on your system : sudo npm install -g bower
 * 5) Launch the installer : sudo grunt install
 * 6) If you have problems downloading the zip file, execute the following :
      - cp utils/selenium-server-standalone-2.42.2.jar node_modules/protractor/selenium/selenium-server-standalone-2.42.2.jar
@@ -29,4 +30,5 @@ A few grunt tasks are available in the Gruntfile.js :
 * prod      : start a new server on localhost:9002 starting in /dist repository and open the navigator
 * build     : minimify / concatenate assets and copy everything to the /dist directory
 * test:unit : run karma test
-* test:e2e  : run protractor test on test server (0.0.0.0:9002, needs to be started first with grunt connect:testserver)
+* test:e2e  : run protractor test on test server (0.0.0.0:9002, needs to be started first with grunt connect:testserver), also, make sure to launch the grunt build before since the test are based on /dist directory
+
