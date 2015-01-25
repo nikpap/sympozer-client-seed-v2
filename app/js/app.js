@@ -28,13 +28,16 @@ angular.module('angularTranslateApp', ['pascalprecht.translate']);
 angular.module('authenticationApp', ['ngCookies', 'personsApp']);
 angular.module('importApp', []);
 angular.module('socialsApp', []);
+angular.module('angulartics', []);
+angular.module('angulartics.google.analytics', []);
+
 
 
 angular.module('contextualizationApp', ['mainEventsApp']).run(function (contextFact)
 {
-    //Initialize context factory with current mainEvent
-    //@TODO: change .run function to contextualization app module
-    contextFact.initContext();
+  //Initialize context factory with current mainEvent
+  //@TODO: change .run function to contextualization app module
+  contextFact.initContext();
 });
 
 
@@ -44,37 +47,39 @@ angular.module('contextualizationApp', ['mainEventsApp']).run(function (contextF
  * Main Sympozer Angular app depedencies
  */
 var sympozerApp = angular.module('sympozerApp', [
-    'ui.bootstrap',
-    'ui.select2',
-    'xeditable',
-    'angularMoment',
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
-    'ngRoute',
+  'ui.bootstrap',
+  'ui.select2',
+  'xeditable',
+  'angularMoment',
+  'ngCookies',
+  'ngResource',
+  'ngSanitize',
+  'ngRoute',
 /** SYMPOZER APPS **/
-    'pascalprecht.translate',
-    'ngCachedResource',
-    'authenticationApp',
-    'importApp',
-    'contextualizationApp',
-    'i18nApp',
-    'organizationsApp',
-    'personsApp',
-    'topicsApp',
-    'locationsApp',
-    'equipmentsApp',
-    'eventsApp',
-    'teammatesApp',
-    'rolesApp',
-    'roleLabelsApp',
-    'categoriesApp',
-    'mainEventsApp',
-    'papersApp',
-    'messagesApp',
-    'analyticsApp',
-    'notificationsApp',
-    'socialsApp'
+  'pascalprecht.translate',
+  'ngCachedResource',
+  'authenticationApp',
+  'importApp',
+  'contextualizationApp',
+  'i18nApp',
+  'organizationsApp',
+  'personsApp',
+  'topicsApp',
+  'locationsApp',
+  'equipmentsApp',
+  'eventsApp',
+  'teammatesApp',
+  'rolesApp',
+  'roleLabelsApp',
+  'categoriesApp',
+  'mainEventsApp',
+  'papersApp',
+  'messagesApp',
+  'analyticsApp',
+  'notificationsApp',
+  'socialsApp',
+  'angulartics',
+  'angulartics.google.analytics'
 ]);
 
 
@@ -84,11 +89,11 @@ var sympozerApp = angular.module('sympozerApp', [
  */
 angular.module('sympozerApp').run(function (editableOptions, editableThemes)
 {
-    //Set bootstrap 3 theme
-    editableOptions.theme = 'bs3';
-    // overwrite submit button template
-    editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i></button>';
-    editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()"><i class="fa fa-times"></i></button>';
+  //Set bootstrap 3 theme
+  editableOptions.theme = 'bs3';
+  // overwrite submit button template
+  editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i></button>';
+  editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()"><i class="fa fa-times"></i></button>';
 });
 
 /**
@@ -98,11 +103,11 @@ angular.module('sympozerApp').run(function (editableOptions, editableThemes)
  */
 angular.module('sympozerApp').config(['$provide', '$httpProvider', function ($provide, $httpProvider)
 {
-    //Add our custom interceptor on AJAX requests
-    $httpProvider.interceptors.push('globalHttpInterceptor');
+  //Add our custom interceptor on AJAX requests
+  $httpProvider.interceptors.push('globalHttpInterceptor');
 
-    //Enable cors authentication (otherwise doesn't set session cookie)
-    $httpProvider.defaults.withCredentials = true;
+  //Enable cors authentication (otherwise doesn't set session cookie)
+  $httpProvider.defaults.withCredentials = true;
 
 }]);
 
