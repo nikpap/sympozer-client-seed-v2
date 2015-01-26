@@ -31,3 +31,4 @@ A few grunt tasks are available in the Gruntfile.js :
 * build     : minimify / concatenate assets and copy everything to the /dist directory
 * test:unit : run karma test
 * test:e2e  : run protractor test on test server (0.0.0.0:9002, needs to be started first with grunt connect:testserver), also, make sure to launch the grunt build before since the test are based on /dist directory
+

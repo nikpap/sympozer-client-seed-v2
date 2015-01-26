@@ -21,17 +21,17 @@
         </div>
       </a>
       <ul class="dropdown-menu">
-            <li><a href="#/home/persons/show/{{currentUser.id}}">{{ 'authentication.labels.profile' | translate }}
-              <i class="pull-right fa fa-fw fa-eye"></i></a></li>
-            <li><a href="#/home/authentication/account">{{ 'authentication.labels.account' | translate }} <i class="pull-right fa fa-fw fa-user"></i></a></li>
-            <li><a href="#/home/authentication/settings">{{ 'authentication.labels.settings' | translate }} <i class="pull-right fa fa-fw fa-cog"></i></a></li>
-            <li><a href="#">{{ 'persons.links.my_events' | translate }} <i class="pull-right fa fa-fw fa-calendar"></i></a></li>
-            <!--<li><a href="#">{{ 'persons.links.my_tickets' | translate }} <i class="pull-right fa fa-fw fa-ticket"></i></a></li>-->
-            <li><a href="#">{{ 'persons.links.my_recommandations' | translate }}<i class="pull-right fa fa-fw fa-thumbs-o-up"></i></a></li>
-            <li class="divider"></li>
-            <li>
-              <a href="" class="text-right" ng-controller="signoutCtrl" ng-click="signoutAction()">{{ 'authentication.actions.signout' | translate }}</a>
-            </li>
+        <li><a href="#/home/persons/show/{{currentUser.id}}">{{ 'authentication.labels.profile' | translate }}
+          <i class="pull-right fa fa-fw fa-eye"></i></a></li>
+        <li><a href="#/home/authentication/account">{{ 'authentication.labels.account' | translate }} <i class="pull-right fa fa-fw fa-user"></i></a></li>
+        <li><a href="#/home/authentication/settings">{{ 'authentication.labels.settings' | translate }} <i class="pull-right fa fa-fw fa-cog"></i></a></li>
+        <li><a href="#">{{ 'persons.links.my_events' | translate }} <i class="pull-right fa fa-fw fa-calendar"></i></a></li>
+        <!--<li><a href="#">{{ 'persons.links.my_tickets' | translate }} <i class="pull-right fa fa-fw fa-ticket"></i></a></li>-->
+        <li><a href="#">{{ 'persons.links.my_recommandations' | translate }}<i class="pull-right fa fa-fw fa-thumbs-o-up"></i></a></li>
+        <li class="divider"></li>
+        <li>
+          <a href="" class="text-right" ng-controller="signoutCtrl" ng-click="signoutAction()">{{ 'authentication.actions.signout' | translate }}</a>
+        </li>
       </ul>
     </li>
     <li class="dropdown" ng-controller="messagesPopoverCtrl" ng-show="isLoggedIn">
@@ -62,7 +62,7 @@
         <li ng-repeat="item in notifications">
           <a href="#/notifications">
             <span class="time">{{item.time}}</span>
-              <i class="{{item.iconClasses}}"></i>
+            <i class="{{item.iconClasses}}"></i>
             <span class="msg">{{item.text}}</span>
           </a>
         </li>
