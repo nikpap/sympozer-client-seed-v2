@@ -98,13 +98,24 @@ angular.module('socialsApp').directive('ngSocialButtons', ['GLOBAL_CONFIG', '$co
                         }
 
                         if(containsPath('papers')){
-                            urlOptions.title = $scope.paper.label || '';
-                            urlOptions.description = $scope.paper.publisher || '';
+                            if($scope.paper){
+                                urlOptions.title = $scope.paper.label || '';
+                                urlOptions.description = $scope.paper.publisher || '';    
+                            }else{
+                                urlOptions.title = '';
+                                urlOptions.description = '';                                
+                            }
                         }
 
                         if(containsPath('events')){
-                            urlOptions.title = $scope.event.label || '';
-                            urlOptions.description = $scope.event.description || '';
+                            if($scope.event){
+                                urlOptions.title = $scope.event.label || '';
+                                urlOptions.description = $scope.event.description || '';   
+                            }else{
+                                urlOptions.title = '';
+                                urlOptions.description = '';                                
+                            }
+
                         }
 
                         
