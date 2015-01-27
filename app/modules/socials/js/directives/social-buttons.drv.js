@@ -31,16 +31,13 @@ angular.module('socialsApp').
                 scope: true,
                 replace: true,
                 transclude: true,
-                template: '<li>' +
-                    '<a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)"' +
-                    ' class="ng-social-button">' +
-                    '<span class="ng-social-icon">' +
-                    '<img class="ng-social-icon" src="'+GLOBAL_CONFIG.app.urls.img+'Facebook.png "/>' +
-                    '</span>' +
-                    '<span class="ng-social-text" ng-transclude></span>' +
-                    '</a>' +
-                    '<span ng-show="count" class="ng-social-counter">{{ count }}</span>' +
-                    '</li>',
+
+                template: 
+                    '<a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" ' +
+                    'class="btn btn-social-icon btn-facebook">' +
+                        '<i class="fa fa-facebook"></i>'+
+                    '</a>' ,
+
                 link: function(scope, element, attrs, ctrl) {
                     element.addClass('ng-social-facebook');
                     if (!ctrl) {
@@ -101,15 +98,12 @@ angular.module('socialsApp').
                 replace: true,
                 transclude: true,
 
-                template: '<li>'+
-                    '<a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" class="ng-social-button">' +
-                    '<span class="ng-social-icon">'+
-                    '<img class="ng-social-icon" src="'+GLOBAL_CONFIG.app.urls.img+'GooglePlus.png "/>'+
-                    '</span>'+
-                    '<span class="ng-social-text" ng-transclude></span>'+
-                    '</a>'+
-                    '<span ng-show="count" class="ng-social-counter">{{ count }}</span>'+
-                    '</li>',
+                template: 
+                    '<a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" ' +
+                    'class="btn btn-social-icon btn-google-plus">' +
+                        '<i class="fa fa-google-plus"></i>'+
+                    '</a>' ,
+
                 link: function(scope, element, attrs, ctrl) {
                     element.addClass('ng-social-google-plus');
                     if (!ctrl) {
@@ -153,16 +147,11 @@ angular.module('socialsApp').
                 scope: true,
                 replace: true,
                 transclude: true,
-                template: '<li>' +
-                    '<a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)"' +
-                    ' class="ng-social-button">' +
-                    '<span class="ng-social-icon">' +
-                    '<img class="ng-social-icon" src="'+GLOBAL_CONFIG.app.urls.img+'Linkedin.png"/>' +
-                    '</span>' +
-                    '<span class="ng-social-text" ng-transclude></span>' +
-                    '</a>' +
-                    '<span ng-show="count" class="ng-social-counter">{{ count }}</span>' +
-                    '</li>',
+                template:                     
+                    '<a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" ' +
+                    'class="btn btn-social-icon btn-linkedin">' +
+                        '<i class="fa fa-linkedin"></i>'+
+                    '</a>',
                 link: function(scope, element, attrs, ctrl) {
                     element.addClass('ng-social-linkedin');
                     if (!ctrl) {
@@ -208,15 +197,11 @@ angular.module('socialsApp').
                 scope: true,
                 replace: true,
                 transclude: true,
-                template: '<li>'+
-                    '<a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" class="ng-social-button">' +
-                    '<span class="ng-social-icon">' +
-                    '<img class="ng-social-icon" src="'+GLOBAL_CONFIG.app.urls.img+'Twitter.png"/>' +
-                    '</span>' +
-                    '<span class="ng-social-text" ng-transclude></span>' +
-                    '</a>'+
-                    '<span ng-show="count" class="ng-social-counter">{{ count }}</span>' +
-                    '</li>',
+                template:                     
+                    '<a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" ' +
+                    'class="btn btn-social-icon btn-twitter">' +
+                        '<i class="fa fa-twitter"></i>'+
+                    '</a>',
                 controller: function($scope) {
                 },
                 link: function(scope, element, attrs, ctrl) {

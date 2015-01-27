@@ -11,11 +11,13 @@
         <i class="fa fa-caret-square-o-down"></i>
         <span class="visible-sm-inline visible-lg-inline visible-md-inline"> {{ 'import.import' | translate}}</span>
       </button>
+
       <a class="btn btn-info" sympozer-acl-show="mainEvent" href="#/home/mainEvents/edit/{{mainEvent.id}}" role="button">
         <i class="fa fa-edit fa-1x"></i>
-        <span class="visible-sm-inline visible-lg-inline visible-md-inline">{{ 'mainEvents.actions.edit' | translate}}</span>
+        <span class="visible-sm-inline visible-lg-inline visible-md-inline">{{ 'mainEvents.actions.edit' | translate}}</span>        
       </a>
-    </div>
+          
+    </div>   
   </div>
 </div>
 
@@ -156,8 +158,5 @@
        ng-include="GLOBAL_CONFIG.app.modules.socials.urls.partials + 'twitterTimeline-show.html'"/>
 
 </div>
-
-
-<span ng-social-buttons ></span>
      
-
+<span ng-social-buttons ></span>

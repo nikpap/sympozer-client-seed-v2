@@ -14,14 +14,16 @@ angular.module('socialsApp').directive('ngSocialButtons', ['GLOBAL_CONFIG', '$co
             restrict: 'A',
             replace: true,
             transclude: true,
-            template:   '<div class="ng-social-container ng-cloak">' +
-                '<ul ng-social>'+
-                '<li ng-social-facebook></li>'+
-                '<li ng-social-google-plus></li>'+
-                '<li ng-social-linkedin></li>'+
-                '<li ng-social-twitter></li>'+
+
+            template:   
+            '<div>' +
+                '<ul>'+
+                    '<li class="ng-social-facebook" style="margin: 2px;"></li>'+
+                    '<li class="ng-social-google-plus" style="margin: 2px;"></li>'+
+                    '<li class="ng-social-linkedin" style="margin: 2px;"></li>'+
+                    '<li class="ng-social-twitter" style="margin: 2px;"></li>'+
                 '</ul>' +
-                '</div>',
+            '</div>',
 
             controller: ['$scope', '$q', '$http', function ($scope, $q, $http) {
 
@@ -85,9 +87,9 @@ angular.module('socialsApp').directive('ngSocialButtons', ['GLOBAL_CONFIG', '$co
 
                         if(containsPath('mainEvents')){
                             if(options.track.name == 'twitter'){
-                                urlOptions.title = gestionHashTag($scope.currentMainEvent.twitterid) + "  " +
-                                    $scope.currentMainEvent.label+ "  " +
-                                    $scope.currentMainEvent.description || '';
+                                urlOptions.title = //gestionHashTag($scope.currentMainEvent.twitterid) + "  " +
+                                                    $scope.currentMainEvent.label+ "  " +
+                                                    $scope.currentMainEvent.description || '';
                             }else{
                                 urlOptions.title = $scope.currentMainEvent.label || '';
                             }
@@ -104,10 +106,8 @@ angular.module('socialsApp').directive('ngSocialButtons', ['GLOBAL_CONFIG', '$co
                             urlOptions.title = $scope.event.label || '';
                             urlOptions.description = $scope.event.description || '';
                         }
-/*
-                        urlOptions.title = "ret";
-                        urlOptions.description = "rett";
-*/
+
+                        
                         return ctrl.makeUrl(options.clickUrl || options.popup.url, urlOptions);
                     },
                     clickShare: function (e, options) {
