@@ -7,8 +7,8 @@ function template(tmpl, context, filter) {
     });
 }
 
-angular.module('socialsApp').directive('ngSocialButtons', ['GLOBAL_CONFIG', '$compile', '$q', '$parse', '$http', '$location',
-    function (GLOBAL_CONFIG, $compile, $q, $parse, $http, $location) {
+angular.module('socialsApp').directive('ngSocialButtons', ['$compile', '$q', '$parse', '$http', '$location',
+    function ($compile, $q, $parse, $http, $location) {
         'use strict';
         return {
             restrict: 'A',
@@ -25,8 +25,14 @@ angular.module('socialsApp').directive('ngSocialButtons', ['GLOBAL_CONFIG', '$co
                 '</ul>' +
             '</div>',
 
-            controller: ['$scope', '$q', '$http', function ($scope, $q, $http) {
+            controller: ['$scope', '$rootScope', '$routeParams', 'mainEventsFact', '$q', '$http', 
+                function ($scope, $rootScope, $routeParams, mainEventsFact, $q, $http) {
 
+                //recuperation des variables
+                $scope.mainEvent = mainEventsFact.get({id: $routeParams.mainEventId}, function(data){
+                    //console.log(data);
+                });
+                
                 var getUrl = function () {
                     return $location.absUrl();
                 };
@@ -77,6 +83,7 @@ angular.module('socialsApp').directive('ngSocialButtons', ['GLOBAL_CONFIG', '$co
                             });
                         }
                     },
+                    
                     link: function (options) {
                         options = options || {};
                         var urlOptions = options.urlOptions || {};
@@ -85,32 +92,39 @@ angular.module('socialsApp').directive('ngSocialButtons', ['GLOBAL_CONFIG', '$co
                         urlOptions.showcounts = 'false';
                         //urlOptions.image = getImage();
 
+                        // conferance
                         if(containsPath('mainEvents')){
-                            if(options.track.name == 'twitter'){
-                                urlOptions.title = //gestionHashTag($scope.currentMainEvent.twitterid) + "  " +
-                                                    $scope.currentMainEvent.label+ "  " +
-                                                    $scope.currentMainEvent.description || '';
+                            if(options.track.name == 'twitter' && $scope.mainEvent.twitter){
+
+                                urlOptions.title = gestionHashTag($scope.mainEvent.twitter) + "  " ;
+                                if($scope.mainEvent.label)
+                                    urlOptions.title += $scope.mainEvent.label+ "  " ;
+                                if($scope.mainEvent.description)
+                                    urlOptions.title += $scope.mainEvent.description ;
+
                             }else{
-                                urlOptions.title = $scope.currentMainEvent.label || '';
+                                urlOptions.title = $scope.mainEvent.label || '';
                             }
 
-                            urlOptions.description = $scope.currentMainEvent.description || '';
+                            urlOptions.description = $scope.mainEvent.description || '';
                         }
 
+                        // Papers
                         if(containsPath('papers')){
                             if($scope.paper){
                                 urlOptions.title = $scope.paper.label || '';
-                                urlOptions.description = $scope.paper.publisher || '';    
+                                urlOptions.description = $scope.paper.publisher || '';  
                             }else{
                                 urlOptions.title = '';
                                 urlOptions.description = '';                                
                             }
                         }
 
+                        // Events
                         if(containsPath('events')){
                             if($scope.event){
                                 urlOptions.title = $scope.event.label || '';
-                                urlOptions.description = $scope.event.description || '';   
+                                urlOptions.description = $scope.event.description || '';    
                             }else{
                                 urlOptions.title = '';
                                 urlOptions.description = '';                                

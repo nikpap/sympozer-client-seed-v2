@@ -7,6 +7,7 @@
   <!--Options bar containing possible actions-->
   <div class="options">
     <div class="btn-toolbar">
+      <div ng-social-buttons class="btn-group" style="float: right;" > </div>
       <button ng-controller="importCtrl" disabled="disabled" sympozer-acl-show="mainEvent" ng-click="startImport()" class="btn btn-info" title="{{ 'import.import' | translate}}">
         <i class="fa fa-caret-square-o-down"></i>
         <span class="visible-sm-inline visible-lg-inline visible-md-inline"> {{ 'import.import' | translate}}</span>
@@ -158,5 +159,3 @@
        ng-include="GLOBAL_CONFIG.app.modules.socials.urls.partials + 'twitterTimeline-show.html'"/>
 
 </div>
-     
-<span ng-social-buttons ></span>
