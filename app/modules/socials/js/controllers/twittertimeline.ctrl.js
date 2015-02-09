@@ -17,7 +17,7 @@ angular.module('socialsApp').controller('twitterTimelineCtrl', [
         {
             $scope.$watch(function(scope) { return scope.mainEvent.twitter }, function(tweetsTag)
             {
-                if (mainEvent)
+                if (tweetsTag)
                 {
                     $scope.tweets = twitterFact.getHashTag({tag: tweetsTag}, function success(data)
                     {

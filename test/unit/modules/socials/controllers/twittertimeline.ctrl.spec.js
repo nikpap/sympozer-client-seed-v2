@@ -14,8 +14,7 @@ describe('Test twitterTimelineCtrl - ', function() {
         scope = $rootScope.$new();
         // Create the controller
         ctrl = $controller('twitterTimelineCtrl', {
-            $scope: scope,
-            categoryModel : { id: 1 }
+            $scope: scope
         });
     }));
 
