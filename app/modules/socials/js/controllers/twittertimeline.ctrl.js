@@ -13,12 +13,19 @@ angular.module('socialsApp').controller('twitterTimelineCtrl', [
         $scope.entitiesLbl = $location.$$path.split('/')[2];
 
 
-        if ($scope.entitiesLbl == "mainEvents" && $scope.$root.currentMainEvent.twitter)
+        if ($scope.entitiesLbl == "mainEvents")
         {
-            $scope.tweets = twitterFact.getHashTag({tag: $scope.currentMainEvent.twitter}, function success(data)
+            $scope.$watch(function(scope) { return scope.mainEvent.twitter }, function(tweetsTag)
             {
-                $scope.tweets = data.statuses;
-            });
+                if (tweetsTag)
+                {
+                    $scope.tweets = twitterFact.getHashTag({tag: tweetsTag}, function success(data)
+                    {
+                        $scope.tweets = data.statuses;
+                    }); 
+                }
+
+            }, true);     
         }
         else if ($scope.entitiesLbl == "persons")
         {
