@@ -48,7 +48,7 @@ angular.module('socialsApp').directive('ngSocialButtons', ['$compile', '$q', '$p
                     return false;
                 };
 
-                var containsDieze= function (val) {
+                var containsDieze = function (val) {
                     var res = val.substr(0,1);
 
                     if(res == '#'){
@@ -58,7 +58,7 @@ angular.module('socialsApp').directive('ngSocialButtons', ['$compile', '$q', '$p
                     }
                 };
 
-                var gestionHashTag= function (val) {
+                var gestionHashTag = function (val) {
                     var myTab = val.split(" ");
                     var res = "";
                     var isFirst = true;
@@ -95,17 +95,14 @@ angular.module('socialsApp').directive('ngSocialButtons', ['$compile', '$q', '$p
                         // conferance
                         if(containsPath('mainEvents')){
                             if(options.track.name == 'twitter' && $scope.mainEvent.twitter){
-
-                                urlOptions.title = gestionHashTag($scope.mainEvent.twitter) + "  " ;
+                                urlOptions.title = containsDieze($scope.mainEvent.twitter) + "  " ;
                                 if($scope.mainEvent.label)
                                     urlOptions.title += $scope.mainEvent.label+ "  " ;
                                 if($scope.mainEvent.description)
                                     urlOptions.title += $scope.mainEvent.description ;
-
                             }else{
                                 urlOptions.title = $scope.mainEvent.label || '';
                             }
-
                             urlOptions.description = $scope.mainEvent.description || '';
                         }
 
@@ -129,10 +126,33 @@ angular.module('socialsApp').directive('ngSocialButtons', ['$compile', '$q', '$p
                                 urlOptions.title = '';
                                 urlOptions.description = '';                                
                             }
-
                         }
 
-                        
+                        //persons
+                        if(containsPath('persons')){
+                            if(options.track.name == 'twitter' && $scope.person.twitter){
+                                urlOptions.title = containsDieze($scope.person.twitter) + "  " ;
+                            }
+                            if($scope.person){
+                                urlOptions.title += $scope.person.label || '';
+                                urlOptions.description = $scope.person.description || '';    
+                            }else{
+                                urlOptions.title = '';
+                                urlOptions.description = '';                                
+                            }
+                        }
+
+                        //locations
+                        if(containsPath('locations')){
+                            if($scope.location){
+                                urlOptions.title = $scope.location.label || '';
+                                urlOptions.description = $scope.location.description || '';    
+                            }else{
+                                urlOptions.title = '';
+                                urlOptions.description = '';                                
+                            }
+                        }
+
                         return ctrl.makeUrl(options.clickUrl || options.popup.url, urlOptions);
                     },
                     clickShare: function (e, options) {
