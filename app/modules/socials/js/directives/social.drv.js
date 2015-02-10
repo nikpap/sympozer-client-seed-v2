@@ -130,8 +130,11 @@ angular.module('socialsApp').directive('ngSocialButtons', ['$compile', '$q', '$p
 
                         //persons
                         if(containsPath('persons')){
+                            if(options.track.name == 'twitter' && $scope.person.twitter){
+                                urlOptions.title = containsDieze($scope.person.twitter) + "  " ;
+                            }
                             if($scope.person){
-                                urlOptions.title = $scope.person.label || '';
+                                urlOptions.title += $scope.person.label || '';
                                 urlOptions.description = $scope.person.description || '';    
                             }else{
                                 urlOptions.title = '';
