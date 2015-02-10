@@ -130,7 +130,7 @@ angular.module('socialsApp').directive('ngSocialButtons', ['$compile', '$q', '$p
 
                         //persons
                         if(containsPath('persons')){
-                            if($scope.persons){
+                            if($scope.person){
                                 urlOptions.title = $scope.person.label || '';
                                 urlOptions.description = $scope.person.description || '';    
                             }else{
