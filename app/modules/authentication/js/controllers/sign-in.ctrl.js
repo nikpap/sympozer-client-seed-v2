@@ -10,9 +10,11 @@ angular.module('authenticationApp').controller('signinCtrl',
         //log user after a social account login.
         var id = getURLParameter('id'),
             username = getURLParameter('username');
+
+
         if (id && username)
         {
-//            todo : fetch this ?
+//          todo : fetch this ?
             success({username: username, id: id}, false);
         }
         else
@@ -24,6 +26,7 @@ angular.module('authenticationApp').controller('signinCtrl',
 
         var error = function (response, args)
         {
+            alert("EROOOOOOOOOOR sign-in.ctrl");
             //Notify of the signin action error
             pinesNotifications.notify({
                 title: translateFilter('global.validations.error'),
@@ -34,6 +37,7 @@ angular.module('authenticationApp').controller('signinCtrl',
 
         function success(user, notif)
         {
+            alert("SUCCEEEEEES sign-in.ctrl");
             $scope.user = user;
 
             //Modify current user
@@ -70,11 +74,15 @@ angular.module('authenticationApp').controller('signinCtrl',
         //Send signin request with signin form information
         $scope.signinAction = function (user)
         {
+            alert("signinAction user : "+user);
+            alert("$scope.user.username :"+$scope.user.username);
+            alert("$scope.user.password : "+$scope.user.password);
             usersFact.signin({}, {"_username": $scope.user.username, "_password": $scope.user.password}, success, error);
         };
 
         function getURLParameter(param)
         {
+
             var sURLVariables = window.location.hash.split('?').length > 1 ? window.location.hash.split('?')[1].split('&') : {};
             var sURLVariables = window.location.hash.split('?').length > 1 ? window.location.hash.split('?')[1].split('&') : {};
             for (var i = 0; i < sURLVariables.length; i++)
@@ -82,6 +90,8 @@ angular.module('authenticationApp').controller('signinCtrl',
                 var parameterName = sURLVariables[i].split('=');
                 if (parameterName[0] == param)
                 {
+                    alert("parameterName[0] : "+parameterName[0]);
+                    alert("parameterName[1] : "+parameterName[1]);
                     return parameterName[1];
                 }
             }
