@@ -2,7 +2,7 @@
 /**
  * Main Sympozer Angular app controller
  */
-angular.module('sympozerApp').controller('mainCtrl', ['$scope', '$rootScope', '$timeout', 'progressLoader', '$location', 'GLOBAL_CONFIG', function ($scope, $rootScope, $timeout, progressLoader, $location, GLOBAL_CONFIG)
+angular.module('sympozerApp').controller('mainCtrl', ['$scope', '$rootScope', '$timeout', 'progressLoader', '$location', 'GLOBAL_CONFIG', '$analytics', '$routeParams', function ($scope, $rootScope, $timeout, progressLoader, $location, GLOBAL_CONFIG, $analytics, $routeParams)
 {
 
 
@@ -50,7 +50,9 @@ angular.module('sympozerApp').controller('mainCtrl', ['$scope', '$rootScope', '$
 
     $scope.$on('$routeChangeSuccess', function (e)
     {
-        // console.log('success: ', $location.path());
+        console.log('success: ', $location.path());
+        console.log('success: ', $location.absUrl());
+        $analytics.pageTrack($location.path());
         progressLoader.end();
     });
 
