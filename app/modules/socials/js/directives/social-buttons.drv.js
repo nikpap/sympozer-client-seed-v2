@@ -15,8 +15,10 @@ angular.module('socialsApp').
                 popup: {
                     //url: 'http://www.facebook.com/sharer/sharer.php?u={url}',
                     //url: 'http://www.facebook.com/sharer/sharer.php?p[url]={url}&p[images][0]={image}&p[title]={title}&p[summary]={description}&u={url}',
-                    url: 'https://www.facebook.com/dialog/feed?app_id=87741124305&link={url}&name={title}&description={description}&redirect_uri=https://www.facebook.com/login.php',
-                    width: 600,
+                    // 1580110185566751    1062749213751041
+                    //url: 'https://www.facebook.com/dialog/feed?app_id=87741124305&link={url}&name={title}&description={description}&redirect_uri=https://www.facebook.com/login.php',
+                    url: 'https://www.facebook.com/dialog/feed?%20app_id=1062749213751041&name={title}&description={description}&link={url}&source={url}&redirect_uri=https://www.facebook.com/login.php',
+                    width: 800,
                     height: 500
                 },
                 track: {
@@ -132,7 +134,8 @@ angular.module('socialsApp').
                 },
                 popup: {
                     //https://www.linkedin.com/shareArticle?title=Linkdin+Share&summary=testing+Linkdin+Share&mini=true&url=http%3A%2F%2Fwww%2Egoogle%2Ecom%2Eau
-                    url: 'https://www.linkedin.com/shareArticle?title={title}&summary={description}&source={}&mini=true&url={url}',
+                    //url: 'https://www.linkedin.com/shareArticle?title={title}&summary={description}&source={}&mini=true&url={url}',
+                    url: 'https://www.linkedin.com/shareArticle?url={url}&title={title}&summary={description}&source={}',
                     width: 600,
                     height: 500
                 },
