@@ -8,7 +8,7 @@
 angular.module('personsApp').factory('personsFact', ['$resource', function ($resource)
 {
 
-    return $resource(
+    var resource =  $resource(
         globalConfig.api.urls.get_persons,
         {},
         {
@@ -21,7 +21,16 @@ angular.module('personsApp').factory('personsFact', ['$resource', function ($res
             allByConference: {method: 'GET', url: globalConfig.api.urls.get_mainEvents + '/:mainEventId/persons', params: {'mainEventId': '@mainEventId'}},
             test           : {method: 'GET', url: 'test.jsonld', params: {}, isArray: false}
 
-
         }
     );
+
+    resource.serialize = function (object) {
+        var DTObject = {
+            'name': object.name
+        }
+    }
+
+
+    return resource;
+
 }]);

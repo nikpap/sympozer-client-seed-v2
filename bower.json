@@ -32,7 +32,9 @@
     "bootstrap-tags": "~1.1.5",
     "angular-cached-resource": "~1.0.0",
     "angular-validation-match": "~1.2.0",
-    "angulartics"             : "0.17.1"
-
+    "angulartics": "0.17.1",
+    "rdf-rest-js" : "0.9.0"
   }
+
 }
+
