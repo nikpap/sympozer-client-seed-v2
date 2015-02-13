@@ -23,6 +23,8 @@ angular.module('personsApp').controller('personsTestCtrl', [ '$scope', '$rootSco
 
     $scope.person.$create({}, success, error);*/
 
+    var strJson = "";
+
     "use strict";
     $scope.triples = []; // Here it's a JSON-LD
 
@@ -31,7 +33,6 @@ angular.module('personsApp').controller('personsTestCtrl', [ '$scope', '$rootSco
     bc.getState()
         .then(function(g) {
             // Here we have an in-memory graph representation
-            var strJson = "";
 
             // Creating an instance of the serialiser from the factory
             var serialiser = serializerFactory.getSerializer({
@@ -48,6 +49,8 @@ angular.module('personsApp').controller('personsTestCtrl', [ '$scope', '$rootSco
 
                 // strJson contains the full JSON-LD
                 // we hope it's the same as the original one
+
+
                 console.log(strJson);
                 angular.fromJson(strJson).forEach(function(e) {
                     var json = {};
@@ -98,5 +101,8 @@ angular.module('personsApp').controller('personsTestCtrl', [ '$scope', '$rootSco
             console.log(reason);
         });
 
+
+
+   // strJson.serialize();
 
 }]);

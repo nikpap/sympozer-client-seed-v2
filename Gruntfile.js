@@ -86,22 +86,6 @@ module.exports = function (grunt)
         options: {
           base      : '<%= yeoman.app %>',
           port     : 9000,
-            middleware: function(connect, options) {
-                return [
-                    function(req, res, next) {
-                        res.setHeader('Access-Control-Allow-Origin', '*');
-                        res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-                        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-                        // don't just call next() return it
-                        return next();
-                    },
-
-                    // add other middlewares here
-                    connect.static(require('path').resolve('.'))
-
-                ];
-            },
           keepalive: true
         }
       },
