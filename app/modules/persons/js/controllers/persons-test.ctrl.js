@@ -24,12 +24,13 @@ angular.module('personsApp').controller('personsTestCtrl', [ '$scope', '$rootSco
     $scope.person.$create({}, success, error);*/
 
     var strJson = "";
+    var ns = "http://schema.org/";
+    $scope.person = new personsFact();
 
     "use strict";
     $scope.triples = []; // Here it's a JSON-LD
 
-    var bc = coreFactory.getCore("http://localhost:8080/api/user/54db2bc23119e620131aa97d");
-
+    var bc = coreFactory.getCore("http://localhost:8080/api/user/54dde93531328d7c0741856f");
     bc.getState()
         .then(function(g) {
             // Here we have an in-memory graph representation
@@ -50,23 +51,40 @@ angular.module('personsApp').controller('personsTestCtrl', [ '$scope', '$rootSco
                 // strJson contains the full JSON-LD
                 // we hope it's the same as the original one
 
-
-                console.log(strJson);
+                //console.log(strJson);
+                var test ="{";
                 angular.fromJson(strJson).forEach(function(e) {
                     var json = {};
+
                     json.subject = e["@id"];
                     for (var key in e) {
                         if (e.hasOwnProperty(key) && key !== "@id") {
-                            json.predicate = key;
+
+                            json.predicate = key.replace(ns, "");
+                            test+=  '"'+ json.predicate + '" : ';
                             if (e[key]["@value"]) {
+
                                 json.object = e[key]["@value"];
                             } else {
                                 json.object = e[key]["@id"];
                             }
+                            test+=  '"'+ json.object + '" ,';
                         }
+
                     }
+
+
                     $scope.triples.push(json);
+
                 });
+                test = test.substring(0, test.length-1);
+                test+="}";
+                console.log(test);
+
+                var jsonTest = JSON.parse(test);
+                console.log(jsonTest.familyName);
+                $scope.person.familyName =jsonTest.familyName;
+                $scope.person.givenName =jsonTest.givenName;
 
                 $scope.$apply(); // ugly
 

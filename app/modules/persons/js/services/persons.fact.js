@@ -29,10 +29,10 @@ angular.module('personsApp').factory('personsFact', ['$resource', function ($res
         var DTObject = {
             'givenName': object.givenName,
             'familyName': object.familyName
+            //externalPublications
         }
     }
 
-    alert("object.familyName = " + resource.familyName);
 
     return resource;
 

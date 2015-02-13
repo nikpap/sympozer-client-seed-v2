@@ -44,6 +44,10 @@ angular.module('personsApp').config([ '$routeProvider', function ($routeProvider
             templateUrl: globalConfig.app.modules.persons.urls.partials + 'pages/persons-test.html',
             controller : 'personsTestCtrl'
         })
+        .when('/home/persons/testPost', {
+            templateUrl: globalConfig.app.modules.persons.urls.partials + 'pages/persons-testPost.html',
+            controller : 'personsTestPostCtrl'
+        })
         .otherwise({
             redirectTo: '/persons/list'
         });

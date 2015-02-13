@@ -19,7 +19,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <div class="panel-body">
-                    <panel panel-class="panel panel-gray" heading="{{person.firstName || '???'}} {{person.familyName || '???'}}">
+                    <panel panel-class="panel panel-gray" heading="{{person.firstName || '???'}} {{person.familyName || 'JACKYYYYYYYYYYYYY'}}">
                         <div class="row">
                             <div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">
                                 <img no-image ng-src="{{ person.img }}" alt="" class="pull-left img-responsive img-circle" style="margin: 0 20px 20px 0">
@@ -28,6 +28,8 @@
                                 <h3>{{'persons.labels.about' | translate }}</h3>
 
                                 <p>{{person.description || '????'}}</p>
+                                <p>{{person.familyName || '????'}}</p>
+                                <p>{{person.givenName || '????'}}</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <div class="table-responsive">
