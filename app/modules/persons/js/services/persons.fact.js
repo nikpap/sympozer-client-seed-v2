@@ -27,12 +27,17 @@ angular.module('personsApp').factory('personsFact', ['$resource', function ($res
     resource.serialize = function (object) {
 
         var DTObject = {
-            'givenName': object.givenName,
-            'familyName': object.familyName
+            'firstName': object.firstName,
+            'familyName': object.familyName,
+            'description': object.description,
+            'email': object.email,
+            'img' : object.img,
+            'website': object.website,
+            'facebook': object.facebook,
+            'twitter': object.twitter,
+            'linkedIn': object.linkedIn
         }
     }
-
-    alert("object.familyName = " + resource.familyName);
 
     return resource;
 

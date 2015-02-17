@@ -1,27 +1,6 @@
 angular.module('personsApp').controller('personsTestCtrl', [ '$scope', '$rootScope', '$routeParams', 'personsFact', function ($scope, $rootScope, $routeParams, personsFact )
 {
-
-    /*var t = personsFact.test().$promise;
-    t.then(function(greeting) {
-       alert('Success: ' + greeting.name);
-   }, function(reason) {
-       alert('Failed: ' + reason);
-   });
-
     $scope.person = new personsFact();
-    $scope.person.name = "coucou";
-
-    var success = function (response, args)
-    {
-        alert("success");
-    }
-
-    var error = function (response, args)
-    {
-        alert(args);
-    }
-
-    $scope.person.$create({}, success, error);*/
 
     var strJson = "";
 
