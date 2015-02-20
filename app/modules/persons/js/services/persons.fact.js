@@ -27,6 +27,7 @@ angular.module('personsApp').factory('personsFact', ['$resource', function ($res
     resource.serialize = function (object) {
 
         var DTObject = {
+            'id' : object.id,
             'firstName': object.firstName,
             'familyName': object.familyName,
             'description': object.description,

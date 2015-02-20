@@ -1,15 +1,14 @@
-/**
- * Show person controller
- *
- * @type {controller}
- */
 angular.module('personsApp').controller('personsShowCtrl', [ '$scope', '$rootScope', '$routeParams', 'personsFact', function ($scope, $rootScope, $routeParams, personsFact )
 {
     $scope.person = new personsFact();
+
+    var strJson = "";
+    var ns = "http://schema.org/";
+
     "use strict";
     $scope.triples = []; // Here it's a JSON-LD
 
-    var bc = coreFactory.getCore("http://localhost:8080/api/user/"+{id: $routeParams.personId});
+    var bc = coreFactory.getCore("http://localhost:8080/api/user/1");
     bc.getState()
         .then(function(g) {
             // Here we have an in-memory graph representation
@@ -25,28 +24,50 @@ angular.module('personsApp').controller('personsShowCtrl', [ '$scope', '$rootSco
                 strJson += line; // Chunks of JSON-LD here !
             }).then(function() {
 
-                console.log("JSONLD REPRESENTATION:");
-
                 // strJson contains the full JSON-LD
                 // we hope it's the same as the original one
 
-
-                console.log(strJson);
+                //console.log(strJson);
+                var tmp;
+                var jsonPerson ="{";
                 angular.fromJson(strJson).forEach(function(e) {
-                    var json = {};
-                    json.subject = e["@id"];
+                    //json.subject = e["@id"];
                     for (var key in e) {
                         if (e.hasOwnProperty(key) && key !== "@id") {
-                            json.predicate = key;
+
+                            //json.predicate = key.replace(ns, "");
+                            jsonPerson+=  '"'+ key.replace(ns, "") + '" : ';
+
                             if (e[key]["@value"]) {
-                                json.object = e[key]["@value"];
+
+                                tmp = e[key]["@value"];
                             } else {
-                                json.object = e[key]["@id"];
+                                tmp = e[key]["@id"];
                             }
+                            jsonPerson+=  '"'+ tmp + '" ,';
                         }
+
                     }
-                    $scope.triples.push(json);
+
+
                 });
+                jsonPerson = jsonPerson.substring(0, jsonPerson.length-1);
+                jsonPerson+="}";
+
+                var jsonPerson = JSON.parse(jsonPerson);
+
+
+                $scope.person.id =jsonPerson.id;
+                $scope.person.firstName =jsonPerson.firstName;
+                $scope.person.familyName =jsonPerson.familyName;
+                $scope.person.description =jsonPerson.description;
+                $scope.person.email =jsonPerson.email;
+                $scope.person.img =jsonPerson.img;
+                $scope.person.website =jsonPerson.website;
+                $scope.person.facebook =jsonPerson.facebook;
+                $scope.person.twitter =jsonPerson.twitter;
+                $scope.person.linkedIn =jsonPerson.linkedIn;
+
 
                 $scope.$apply(); // ugly
 
@@ -83,7 +104,6 @@ angular.module('personsApp').controller('personsShowCtrl', [ '$scope', '$rootSco
 
 
 
-
-    $scope.person = personsFact.get({id: $routeParams.personId});
+    // strJson.serialize();
 
 }]);

@@ -46,6 +46,10 @@ angular.module('eventsApp')
                     templateUrl: globalConfig.app.modules.events.urls.partials + 'pages/events-show.html',
                     controller : 'eventsShowCtrl'
                 })
+                .when('/home/test/:mainEventId/events/show/:eventId', {
+                    templateUrl: globalConfig.app.modules.events.urls.partials + 'pages/events-show.html',
+                    controller : 'eventsShowCtrl'
+                })
                 .otherwise({
                     redirectTo: '/home/events/list'
                 });

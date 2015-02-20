@@ -115,4 +115,5 @@ angular.module('personsApp').controller('personsNewCtrl', [ '$scope', 'GLOBAL_CO
                 $scope.addRelationship("papers", paperModel);
             }
         }
+
     }]);

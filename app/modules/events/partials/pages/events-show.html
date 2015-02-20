@@ -35,7 +35,7 @@
                         <h2>{{event.label}}</h2> </br>
                         <h3>{{event.category.label}}</h3>
                         <p>{{ 'events.labels.from' | translate }} {{event.startAt | date:short}} {{ 'events.labels.to' | translate }} {{event.endAt | date:short}} in {{event.location.label || '?'}}</p>
-                        <p>{{event.description}}</p>
+                        <p>descr :{{event.description || '?'}}</p>
                         <p>{{event.comment}}</p>
 
                     </div>
