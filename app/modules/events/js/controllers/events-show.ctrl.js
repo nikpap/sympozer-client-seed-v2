@@ -25,14 +25,12 @@ angular.module('eventsApp').controller('eventsShowCtrl', [ '$scope', '$routePara
             }).then(function() {
 
                 var tmp;
-                var jsonEvent ="{";
+                var strEvent ="{";
                 angular.fromJson(strJson).forEach(function(e) {
-                    //json.subject = e["@id"];
                     for (var key in e) {
                         if (e.hasOwnProperty(key) && key !== "@id") {
 
-                            //json.predicate = key.replace(ns, "");
-                            jsonEvent+=  '"'+ key.replace(ns, "") + '" : ';
+                            strEvent+=  '"'+ key.replace(ns, "") + '" : ';
 
                             if (e[key]["@value"]) {
 
@@ -40,15 +38,15 @@ angular.module('eventsApp').controller('eventsShowCtrl', [ '$scope', '$routePara
                             } else {
                                 tmp = e[key]["@id"];
                             }
-                            jsonEvent+=  '"'+ tmp + '" ,';
+                            strEvent+=  '"'+ tmp + '" ,';
                         }
 
                     }
 
 
                 });
-                jsonEvent = jsonEvent.substring(0, jsonEvent.length-1);
-                jsonEvent+="}";
+                strEvent = strEvent.substring(0, strEvent.length-1);
+                strEvent+="}";
 
                 var jsonEvent = JSON.parse(jsonEvent);
 

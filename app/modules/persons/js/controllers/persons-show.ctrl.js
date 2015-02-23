@@ -6,7 +6,6 @@ angular.module('personsApp').controller('personsShowCtrl', [ '$scope', '$rootSco
     var ns = "http://schema.org/";
 
     "use strict";
-    $scope.triples = []; // Here it's a JSON-LD
 
     var bc = coreFactory.getCore("http://localhost:8080/api/user/1");
     bc.getState()
@@ -29,14 +28,14 @@ angular.module('personsApp').controller('personsShowCtrl', [ '$scope', '$rootSco
 
                 //console.log(strJson);
                 var tmp;
-                var jsonPerson ="{";
+                var strPerson ="{";
                 angular.fromJson(strJson).forEach(function(e) {
                     //json.subject = e["@id"];
                     for (var key in e) {
                         if (e.hasOwnProperty(key) && key !== "@id") {
 
                             //json.predicate = key.replace(ns, "");
-                            jsonPerson+=  '"'+ key.replace(ns, "") + '" : ';
+                            strPerson+=  '"'+ key.replace(ns, "") + '" : ';
 
                             if (e[key]["@value"]) {
 
@@ -44,17 +43,17 @@ angular.module('personsApp').controller('personsShowCtrl', [ '$scope', '$rootSco
                             } else {
                                 tmp = e[key]["@id"];
                             }
-                            jsonPerson+=  '"'+ tmp + '" ,';
+                            strPerson+=  '"'+ tmp + '" ,';
                         }
 
                     }
 
 
                 });
-                jsonPerson = jsonPerson.substring(0, jsonPerson.length-1);
-                jsonPerson+="}";
+                strPerson = strPerson.substring(0, strPerson.length-1);
+                strPerson+="}";
 
-                var jsonPerson = JSON.parse(jsonPerson);
+                var jsonPerson = JSON.parse(strPerson);
 
 
                 $scope.person.id =jsonPerson.id;
@@ -84,19 +83,6 @@ angular.module('personsApp').controller('personsShowCtrl', [ '$scope', '$rootSco
                 parser.addChunk(strJson); // Fill it with the whole Json-LD
                 return parser.finalize();
 
-            }).then(function(parsedGraph) {
-
-                // Creating an instance of the serialiser from the factory
-                var nTriplesSerialiser = serializerFactory.getSerializer({
-                    contentType: "application/n-triples",
-                    graph: parsedGraph
-                });
-
-                console.log("NTRIPLE REPRESENTATION:");
-
-                return nTriplesSerialiser(function(line) {
-                    console.log(line);
-                });
             });
         }).catch(function(reason) {
             console.log(reason);

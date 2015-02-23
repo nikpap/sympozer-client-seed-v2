@@ -19,4 +19,16 @@ angular.module('equipmentsApp').factory('equipmentsFact',
                 all   : {method: 'GET', params: {}, isArray: false}
             }
         );
+        //Construct a DTO object to send to server (Data Transfert Object)
+        resource.serialize = function (object) {
+            var DTObject = {
+                'label': object.label,
+                'description' : objet.description
+            }
+
+            //create the new resource object from DTObject
+            return new resource(DTObject);
+        }
+
+        return resource;
     }]);

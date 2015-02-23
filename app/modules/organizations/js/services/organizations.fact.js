@@ -8,7 +8,7 @@
 angular.module('organizationsApp').factory('organizationsFact',
     ['$resource', '$routeParams', function ($resource, $routeParams)
     {
-        return $resource(
+        var resource = $resource(
             globalConfig.api.urls.get_organizations,
             {},
             {
@@ -27,4 +27,19 @@ angular.module('organizationsApp').factory('organizationsFact',
                 allVersionsByConference: {method: 'GET', url: globalConfig.api.urls.get_mainEvents + '/:mainEventId/organizations', params: {'mainEventId': '@mainEventId'}, isArray: false}
             }
         );
+
+        resource.serialize = function (object) {
+
+            var DTObject = {
+                'id' : object.id,
+                'label' : object.label,
+                'website' : object.website,
+                'country' : object.country,
+                'img' : object.img
+            }
+        }
+
+        return resource;
+
+
     }]);

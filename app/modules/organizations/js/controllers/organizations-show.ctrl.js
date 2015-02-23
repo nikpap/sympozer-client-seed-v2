@@ -5,7 +5,92 @@
  */
 angular.module('organizationsApp').controller('organizationsShowCtrl', [ '$scope', '$routeParams', 'organizationsFact', function ($scope, $routeParams, organizationsFact)
 {
-    //Fetch the organization to display
-    $scope.organization = organizationsFact.get({id: $routeParams.organizationId});
+
+
+    $scope.organization = new organizationsFact();
+
+    var strJson = "";
+    var ns = "http://schema.org/";
+
+    "use strict";
+
+    var bc = coreFactory.getCore("http://localhost:8080/api/organization/1");
+    bc.getState()
+        .then(function(g) {
+            // Here we have an in-memory graph representation
+
+            // Creating an instance of the serialiser from the factory
+            var serialiser = serializerFactory.getSerializer({
+                contentType: "application/ld+json",
+                graph: g
+            });
+
+            // Serialising the Graph to JSON-LD
+            return serialiser(function(line) {
+                strJson += line; // Chunks of JSON-LD here !
+            }).then(function() {
+
+                // strJson contains the full JSON-LD
+                // we hope it's the same as the original one
+
+                //console.log(strJson);
+                var tmp;
+                var strOrganization ="{";
+                angular.fromJson(strJson).forEach(function(e) {
+                    //json.subject = e["@id"];
+                    for (var key in e) {
+                        if (e.hasOwnProperty(key) && key !== "@id") {
+
+                            //json.predicate = key.replace(ns, "");
+                            strOrganization+=  '"'+ key.replace(ns, "") + '" : ';
+
+                            if (e[key]["@value"]) {
+
+                                tmp = e[key]["@value"];
+                            } else {
+                                tmp = e[key]["@id"];
+                            }
+                            strOrganization+=  '"'+ tmp + '" ,';
+                        }
+
+                    }
+
+
+                });
+                strOrganization = strOrganization.substring(0, strOrganization.length-1);
+                strOrganization+="}";
+
+                var jsonOrganization = JSON.parse(strOrganization);
+
+
+
+                $scope.organization.id =jsonOrganization.id;
+                $scope.organization.label =jsonOrganization.label;
+                $scope.organization.website =jsonOrganization.website;
+                $scope.organization.country =jsonOrganization.country;
+                $scope.organization.img =jsonOrganization.img;
+
+
+
+                $scope.$apply(); // ugly
+
+                // OPTIONAL, juste because i want ntriples
+                // We can use the g that you have before,
+                // but we can do a round trip:
+                // the new JSON-LD -> GRAPH -> NTRIPLES
+
+                var parser = parserFactory.getParser({
+                    contentType: "application/ld+json", // it take Json-LD
+                    graph: graph.graph()               // to construct a graph()
+                });
+
+                parser.addChunk(strJson); // Fill it with the whole Json-LD
+                return parser.finalize();
+
+            });
+        }).catch(function(reason) {
+            console.log(reason);
+        });
+
 
 }]);
