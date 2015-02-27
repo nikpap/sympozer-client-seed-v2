@@ -19,7 +19,6 @@ angular.module('personsApp').factory('personsFact', ['$resource', function ($res
             delete         : {method: 'DELETE', url: globalConfig.api.urls.get_persons + '/:id', params: {id: '@id'}, isArray: false},
             all            : {method: 'GET', params: {}},
             allByConference: {method: 'GET', url: globalConfig.api.urls.get_mainEvents + '/:mainEventId/persons', params: {'mainEventId': '@mainEventId'}},
-            test           : {method: 'GET', url: 'test.jsonld', params: {}, isArray: false}
 
         }
     );
@@ -27,19 +26,26 @@ angular.module('personsApp').factory('personsFact', ['$resource', function ($res
     resource.serialize = function (object) {
 
         var DTObject = {
-            'id' : object.id,
+            'id': object.id,
             'firstName': object.firstName,
             'familyName': object.familyName,
             'description': object.description,
             'email': object.email,
-            'img' : object.img,
+            'img': object.img,
+            'papers': [],
             'website': object.website,
             'facebook': object.facebook,
             'twitter': object.twitter,
             'linkedIn': object.linkedIn
         }
-    }
 
+
+        if (object.papers) {
+            for (var i = 0; i < object.papers.length; i++) {
+                DTObject.papers.push({id: object.papers[i].id});
+            }
+        }
+    }
     return resource;
 
 }]);

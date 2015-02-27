@@ -19,7 +19,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <div class="panel-body">
-                    <panel panel-class="panel panel-gray" heading="{{person.firstName || '???'}} {{person.familyName || 'JACKYYYYYYYYYYYYY'}}">
+                    <panel panel-class="panel panel-gray" heading="{{person.firstName || '???'}} {{person.familyName || '???'}}">
                         <div class="row">
                             <div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">
                                 <img no-image ng-src="{{ person.img }}" alt="" class="pull-left img-responsive img-circle" style="margin: 0 20px 20px 0">
@@ -110,6 +110,7 @@
                                 <div class="row">
                                     <div ng-repeat="paper in person.papers track by $index"  ng-show="person.papers" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                         <div sympozer-with-locals locals-paper="paper" ng-include="GLOBAL_CONFIG.app.modules.papers.urls.partials+'views/papers-tile-sm.html'"></div>
+
                                     </div>
                                 </div>
                             </panel>
