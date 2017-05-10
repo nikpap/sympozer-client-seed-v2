@@ -40,6 +40,9 @@ import {eventHelper} from "./eventHelper";
 import { Encoder } from  './lib/encoder';
 import {Ng2Webstorage} from 'ng2-webstorage';
 
+import { Angulartics2Module, Angulartics2Piwik } from 'angulartics2';
+
+
 const routes:Routes = [];
 
 @NgModule({
@@ -81,6 +84,7 @@ const routes:Routes = [];
         MaterialModule.forRoot(),
         MdGridListModule.forRoot(),
         Ng2Webstorage,
+        Angulartics2Module.forRoot([ Angulartics2Piwik ]),
     ],
     providers: [
         DataLoaderService, DBLPDataLoaderService, LocalDAOService, eventHelper, Encoder

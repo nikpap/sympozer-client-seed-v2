@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalDAOService} from  './localdao.service';
-
+import { Angulartics2Piwik } from 'angulartics2';
 
 
 @Component({
@@ -10,7 +10,8 @@ import {LocalDAOService} from  './localdao.service';
 })
 export class AppComponent implements OnInit {
 
-    constructor(private DaoService:LocalDAOService) {
+    constructor(private DaoService:LocalDAOService,
+    			angulartics2Piwik: Angulartics2Piwik) {
     }
 
     ngOnInit():void {
