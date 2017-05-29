@@ -8,11 +8,12 @@ import {Router, NavigationEnd, ActivatedRoute} from '@angular/router';
 import {routerTransition} from './app.router.animation';
 import {LocalStorageService} from 'ng2-webstorage';
 import {ApiExternalServer} from './services/ApiExternalServer';
-
+import {Angulartics2Piwik} from 'angulartics2';
 import {Subscription} from 'rxjs/Subscription';
 import {ToolsService} from './services/tools.service';
 import {VoteService} from './services/vote.service'
 import {MdSnackBar} from "@angular/material";
+import {NavigationStart} from '@angular/router';
 const screenfull = require('screenfull');
 
 
@@ -32,14 +33,34 @@ export class AppComponent implements OnInit {
                 private apiExternalServer: ApiExternalServer,
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
+                private angulartics2Piwik: Angulartics2Piwik,
                 private localStoragexx: LocalStorageService,
                 private toolService: ToolsService,
                 private voteService: VoteService,
                 public snackBar: MdSnackBar) {
 
-                  this.subscription = this.toolService.getFullScreenStatus().subscribe(status => { 
+        this.subscription = this.toolService.getFullScreenStatus().subscribe(status => { 
             this.fullscreen = status; 
         });
+
+        router.events.filter(event => event instanceof NavigationStart)
+        .subscribe((event) => {
+            let arrayRequest;
+            let storage = localStorage.getItem("piwik");
+
+            if (storage) {
+                try {
+                    arrayRequest = JSON.parse(storage);
+                } catch (e) {
+                    arrayRequest = [];
+                }
+            }  
+
+                arrayRequest.push(document.location.hash);
+                localStorage.setItem('piwik', JSON.stringify(arrayRequest));
+            
+
+        })
     }
 
 
@@ -69,6 +90,7 @@ export class AppComponent implements OnInit {
                 html.classList.add('dark');
             }
         }
+
 
         this.DaoService.loadDataset()
             .then(()=>{

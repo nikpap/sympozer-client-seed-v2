@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            console.log(this.route); // snapshot -> _urlSegment -> segments (0, 1, etc.)
+//            console.log(this.route); // snapshot -> _urlSegment -> segments (0, 1, etc.)
             let id = params['id'];
             this.testId = id;
             if (this.testId == 'organization' || this.testId == 'event')

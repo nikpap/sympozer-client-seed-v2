@@ -29,8 +29,11 @@
 
 <script src="./assets/webworker/manager-web-worker.js"></script>
 <script src="./assets/rdfstore.js"></script>
-<!-- <script type="text/javascript">
+<!-- Piwik -->
+<script type="text/javascript">
   var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  // _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
   (function() {
     var u="//dsi-guest-28.univ-lyon1.fr/piwik/";
@@ -38,7 +41,39 @@
     _paq.push(['setSiteId', '2']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+
+
+    window.setInterval(function (){
+      var strRequestsJson = localStorage.getItem('piwik');
+      if(strRequestsJson) {
+        try {
+          var arrRequests = JSON.parse(strRequestsJson);
+            arrRequests = JSON.parse(arrRequests);
+
+        } catch (e) {
+        }
+      } else {
+        var arrRequests = [];
+      }
+      if(arrRequests.constructor === Array) {
+        
+        for (var i = 0;  i < arrRequests.length; i++) {
+          _paq.push(['trackPageView', arrRequests[i]]);
+          console.log('sent 1 request');
+        }
+      } else {
+        console.log(arrRequests);
+      }
+      arrRequests = []; 
+      localStorage.setItem('piwik', JSON.stringify(arrRequests));
+    }, 10000);
+
+
   })();
-</script> -->
+  
+
+
+</script>
+<!-- End Piwik Code -->
 </body>
 </html>
